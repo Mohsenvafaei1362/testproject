@@ -30,6 +30,8 @@ import 'package:testproject/features/register/domain/ripository/register_reposit
     as _i781;
 import 'package:testproject/features/register/domain/usecase/register_usecase.dart'
     as _i800;
+import 'package:testproject/features/todo_list/presentation/bloc/todo_bloc.dart'
+    as _i460;
 
 const String _mock = 'mock';
 const String _dev = 'dev';
@@ -43,6 +45,7 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final networkModule = _$NetworkModule();
+    gh.factory<_i460.TodoBloc>(() => _i460.TodoBloc());
     gh.lazySingleton<_i939.NetworkInfo>(() => _i939.NetworkInfoImpl());
     gh.lazySingleton<_i430.DioLoggerInterceptor>(
       () => _i430.DioLoggerInterceptorMockImpl(),
