@@ -24,6 +24,10 @@ import 'package:testproject/features/login/domain/usecase/login_usecase.dart'
     as _i76;
 import 'package:testproject/features/login/presentation/bloc/login_bloc.dart'
     as _i948;
+import 'package:testproject/features/register/domain/ripository/register_repository.dart'
+    as _i781;
+import 'package:testproject/features/register/domain/usecase/register_usecase.dart'
+    as _i800;
 
 const String _mock = 'mock';
 const String _dev = 'dev';
@@ -41,6 +45,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i430.DioLoggerInterceptor>(
       () => _i430.DioLoggerInterceptorMockImpl(),
       registerFor: {_mock, _dev},
+    );
+    gh.singleton<_i800.RegisterUsecase>(
+      () => _i800.RegisterUsecase(gh<_i781.RegisterRepository>()),
     );
     gh.lazySingleton<_i430.DioLoggerInterceptor>(
       () => _i430.DioLoggerInterceptorImpl(),

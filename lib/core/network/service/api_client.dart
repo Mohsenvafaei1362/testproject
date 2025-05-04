@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:testproject/features/login/data/models/request/login_request.dart';
 import 'package:testproject/features/login/data/models/response/login_response.dart';
+import 'package:testproject/features/register/data/models/request/register_request.dart';
 
 part 'api_client.g.dart';
 
@@ -13,11 +14,7 @@ abstract class ApiClient {
   @POST('auth/login')
   Future<HttpResponse<LoginResponse>> signIn(@Body() LoginRequest loginRequest);
 
-  // //! otpCode
-  // @POST('SmsVerification/verification')
-  // Future<HttpResponse<OtpResponse>> otpCode(@Body() OtpRequest otpRequest);
-
-  // //! دریافت همه رمرز ارزها
-  // @GET('CoinsList/sync')
-  // Future<HttpResponse<List<AllCryptoResponse>>> getAllCryptoEntity();
+  //! ثبت نام
+  @POST('auth/register')
+  Future<HttpResponse<bool>> otpCode(@Body() RegisterRequest registerRequest);
 }
