@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:testproject/features/login/presentation/pages/login.dart';
 import 'package:testproject/features/register/presentation/pages/register.dart';
+import 'package:testproject/features/todo_list/presentation/pages/add_todo.dart';
 import 'package:testproject/features/todo_list/presentation/pages/todo_list.dart';
 
 class RouterPage {
@@ -53,11 +54,14 @@ class RouterPage {
               },
             ),
       ),
-
-      // GoRoute(path: '/register', builder: (context, state) => const Register()),
       GoRoute(path: '/todo', builder: (context, state) => const TodoList()),
+      GoRoute(path: '/addtodo', builder: (context, state) => const AddTodo()),
     ],
-    errorBuilder: (context, state) => const Login(),
+    errorBuilder:
+        (context, state) =>
+            Scaffold(body: Center(child: Text('Error: ${state.error}'))),
+
+    // errorBuilder: (context, state) => const Login(),
     debugLogDiagnostics: true,
   );
 }

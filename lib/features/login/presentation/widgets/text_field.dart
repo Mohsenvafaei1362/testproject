@@ -11,12 +11,14 @@ class TextFieldWidget extends StatelessWidget {
     this.width,
     this.height,
     this.onChanged,
+    this.fillColor,
   });
   final double? width;
   final double? height;
   final String? hintText;
   final String? labelText;
   final void Function(String)? onChanged;
+  final Color? fillColor;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class TextFieldWidget extends StatelessWidget {
         ),
         onChanged: onChanged,
         decoration: InputDecoration(
-          fillColor: Colors.white.withAlpha(600),
+          fillColor: fillColor ?? Colors.white.withAlpha(600),
           filled: true,
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
