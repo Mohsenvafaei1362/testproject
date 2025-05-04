@@ -24,6 +24,8 @@ import 'package:testproject/features/login/domain/usecase/login_usecase.dart'
     as _i76;
 import 'package:testproject/features/login/presentation/bloc/login_bloc.dart'
     as _i948;
+import 'package:testproject/features/register/data/datasource/register_repository_impl.dart'
+    as _i669;
 import 'package:testproject/features/register/domain/ripository/register_repository.dart'
     as _i781;
 import 'package:testproject/features/register/domain/usecase/register_usecase.dart'
@@ -46,9 +48,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i430.DioLoggerInterceptorMockImpl(),
       registerFor: {_mock, _dev},
     );
-    gh.singleton<_i800.RegisterUsecase>(
-      () => _i800.RegisterUsecase(gh<_i781.RegisterRepository>()),
-    );
     gh.lazySingleton<_i430.DioLoggerInterceptor>(
       () => _i430.DioLoggerInterceptorImpl(),
       registerFor: {_prod},
@@ -59,12 +58,22 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i987.ApiClient>(
       () => networkModule.apiClient(gh<_i361.Dio>()),
     );
+    gh.lazySingleton<_i781.RegisterRepository>(
+      () => _i669.RegisterRepositoryImpl(
+        gh<_i939.NetworkInfo>(),
+        gh<_i987.ApiClient>(),
+      ),
+      registerFor: {_dev, _prod},
+    );
     gh.lazySingleton<_i860.LoginRepository>(
       () => _i873.LoginRepositoryImpl(
         gh<_i939.NetworkInfo>(),
         gh<_i987.ApiClient>(),
       ),
       registerFor: {_dev, _prod},
+    );
+    gh.singleton<_i800.RegisterUsecase>(
+      () => _i800.RegisterUsecase(gh<_i781.RegisterRepository>()),
     );
     gh.singleton<_i76.LoginUsecase>(
       () => _i76.LoginUsecase(gh<_i860.LoginRepository>()),

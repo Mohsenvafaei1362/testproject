@@ -27,8 +27,19 @@ class $AssetsImagesGen {
   /// File path: assets/images/logo4.png
   AssetGenImage get logo4 => const AssetGenImage('assets/images/logo4.png');
 
+  /// File path: assets/images/unsplash_yMSecCHsIBc.png
+  AssetGenImage get unsplashYMSecCHsIBc =>
+      const AssetGenImage('assets/images/unsplash_yMSecCHsIBc.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [logo, logo1, logo2, logo3, logo4];
+  List<AssetGenImage> get values => [
+    logo,
+    logo1,
+    logo2,
+    logo3,
+    logo4,
+    unsplashYMSecCHsIBc,
+  ];
 }
 
 class Assets {

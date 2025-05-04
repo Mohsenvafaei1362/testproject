@@ -6,7 +6,7 @@ import 'package:testproject/core/network/di/di.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  configureDependencies(environment: Env.dev);
+  await configureDependencies(environment: Env.dev);
   runApp(
     EasyDynamicThemeWidget(
       //! تنظیم حالت پیش‌فرض تم به حالت روشن (Light)
