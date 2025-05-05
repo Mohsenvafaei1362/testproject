@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -49,18 +50,68 @@ class _LoginState extends State<Login> {
               context.go('/todo');
             }
             if (state is DataError) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Center(
-                    child: Text(
-                      state.message ?? 'Error',
-                      style: TextStyle(color: Colors.red),
+              final overlay = Overlay.of(context);
+              final overlayEntry = OverlayEntry(
+                builder:
+                    (context) => Positioned(
+                      bottom: MediaQuery.of(context).padding.bottom + 20,
+                      left: 20,
+                      right: 20,
+                      child: CupertinoPopupSurface(
+                        child: Container(
+                          padding: EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: CupertinoColors.systemTeal.withAlpha(20),
+                            borderRadius: BorderRadius.circular(8),
+                            boxShadow: [
+                              BoxShadow(
+                                color: CupertinoColors.systemGrey.withOpacity(
+                                  0.2,
+                                ),
+                                blurRadius: 6,
+                              ),
+                            ],
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                CupertinoIcons.clear_thick_circled,
+                                color: CupertinoColors.destructiveRed,
+                              ),
+                              SizedBox(width: 8),
+                              Text(
+                                state.message ?? 'Error',
+                                style: CupertinoTheme.of(
+                                  context,
+                                ).textTheme.textStyle.copyWith(
+                                  color: CupertinoColors.destructiveRed,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                  duration: const Duration(seconds: 2),
-                  backgroundColor: Colors.white,
-                ),
               );
+
+              overlay.insert(overlayEntry);
+
+              Future.delayed(Duration(seconds: 4), () {
+                overlayEntry.remove();
+              });
+              // ScaffoldMessenger.of(context).showSnackBar(
+              //   SnackBar(
+              //     content: Center(
+              //       child: Text(
+              //         state.message ?? 'Error',
+              //         style: TextStyle(color: Colors.red),
+              //       ),
+              //     ),
+              //     duration: const Duration(seconds: 2),
+              //     backgroundColor: Colors.white,
+              //   ),
+              // );
             }
           },
           builder: (context, state) {

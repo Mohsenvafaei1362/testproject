@@ -12,6 +12,7 @@
 import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
+import 'package:testproject/core/local_storage/save_todo.dart' as _i197;
 import 'package:testproject/core/network/dio_logger_interceptor.dart' as _i430;
 import 'package:testproject/core/network/network_info.dart' as _i939;
 import 'package:testproject/core/network/network_module.dart' as _i817;
@@ -45,11 +46,14 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final networkModule = _$NetworkModule();
-    gh.factory<_i460.TodoBloc>(() => _i460.TodoBloc());
     gh.lazySingleton<_i939.NetworkInfo>(() => _i939.NetworkInfoImpl());
     gh.lazySingleton<_i430.DioLoggerInterceptor>(
       () => _i430.DioLoggerInterceptorMockImpl(),
       registerFor: {_mock, _dev},
+    );
+    gh.lazySingleton<_i197.ToDoPreferences>(() => _i197.ToDoPreferencesImpl());
+    gh.factory<_i460.TodoBloc>(
+      () => _i460.TodoBloc(gh<_i197.ToDoPreferences>()),
     );
     gh.lazySingleton<_i430.DioLoggerInterceptor>(
       () => _i430.DioLoggerInterceptorImpl(),
